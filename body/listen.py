@@ -1,47 +1,54 @@
-#telugu-hindi-english:command
-#understands in english
+# Hindi or English - Command
+# English
 
-#step-1: pip install googletrans
+# Step - 1
+# pip install googletrans==3.1.0a0
 
-#step-2: creating three functions
-# 1) listening function
-# 2) translating to english function
-# 3) connecting
+# Step - 2
+# Three Functions
+# 1 - Listen Function 
+# 2 - English Translation
+# 3 - Connect
 
-import speech_recognition as sr
-from googletrans import Translator
+import speech_recognition as sr #pip install speechrecognition
+from googletrans import Translator #pip install googletrans==3.1.0a0
 
-def listen():
+# 1 - Listen : Hindi or English
+
+def Listen():
+
     r = sr.Recognizer()
+
     with sr.Microphone() as source:
         print("Listening...")
+        r.pause_threshold = 1
+        audio = r.listen(source,0,8) # Listening Mode.....
+    
+    try:
+        print("Recognizing...")
+        query = r.recognize_google(audio,language="hi")
 
-        audio = r.listen(source)
-        try:
-            print("Recognizing...")
-            query = r.recognize_google(audio, language="en-in")
-            print(f"You said: {query}")
-            return query
-        except Exception as e:
-            print(f"Sorry, an error occurred: {e}")
+    except:
+        return ""
+    
+    query = str(query).lower()
+    return query
 
-listen()
+# 2 - Translation
 
-
-# 2) translating to english function
-
-def TranslationHinToEng(audio):
-    line = str(audio)
+def TranslationHinToEng(Text):
+    line = str(Text)
     translate = Translator()
     result = translate.translate(line)
     data = result.text
-    print(f"you : {data}.")
+    print(f"You : {data}.")
     return data
 
-# 3) connecting
+# 3 - Connect
 
 def MicExecution():
-    query = listen()
+    query = Listen()
     data = TranslationHinToEng(query)
     return data
 
+MicExecution()
