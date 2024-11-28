@@ -40,3 +40,6 @@ The **Advanced Voice Assistant** is an AI-powered system designed to automate da
    ```bash  
    git clone https://github.com/sunkari-vijay-kumar/advanced_jarvis.git  
    cd advanced_jarvis 
+2. run the main.py file:
+   '''bash
+     python main.py
